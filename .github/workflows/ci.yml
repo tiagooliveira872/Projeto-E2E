@@ -27,7 +27,7 @@ jobs:
 
     - name: Upload de resultados do teste (opcional)
       if: success()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: relatorios-de-teste
         path: target/test-outputs/
