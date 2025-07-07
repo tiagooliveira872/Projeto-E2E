@@ -1,13 +1,19 @@
 package Steps;
 
 import Pages.LoginPage;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 
 import static Runners.RunnerBase.getDriver;
 
 public class LoginSteps {
 
-    LoginPage loginPage = new LoginPage();
+    LoginPage loginPage;
+
+    @Before
+    public void setUp() {
+        loginPage = new LoginPage();
+    }
 
     @Given("realize login no site da linx ecommerce com Sucesso")
     public void realizeLoginNoSiteSauceDemo() {
