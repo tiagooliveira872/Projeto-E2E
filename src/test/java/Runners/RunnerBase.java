@@ -18,12 +18,21 @@ public class RunnerBase {
     }
 
     public static WebDriver getDriverChrome() {
-
         ChromeOptions options = new ChromeOptions();
-        // options.addArguments(“–headless”); //Descomentar essa linha caso queira rodar o chrome em modo minimizado
-        options.addArguments("incognito");
-        driver = new ChromeDriver(options);
 
+        // Executa o Chrome em modo headless (sem interface gráfica) — necessário para ambientes de CI/CD
+        options.addArguments("--headless=new"); // ou "--headless" dependendo da versão do ChromeDriver
+
+        // Evita problemas comuns em ambientes Linux
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+
+        // Abre em modo incógnito
+        options.addArguments("incognito");
+
+        // Inicializa o driver com as opções configuradas
+        WebDriver driver = new ChromeDriver(options);
         return driver;
     }
+
 }
