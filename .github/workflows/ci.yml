@@ -1,0 +1,33 @@
+name: Executar Testes Automatizados E2E
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v3
+
+    - name: Configurar o JDK
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Instalar dependências e rodar testes
+      run: mvn clean test
+
+    - name: Upload de resultados do teste (opcional)
+      if: success()
+      uses: actions/upload-artifact@v3
+      with:
+        name: relatorios-de-teste
+        path: target/test-outputs/
